@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(), Handler.Callback {
                 android.Manifest.permission.CAMERA,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
-
+        private const val REQUIRED_SUPPORTED_HARDWARE_LEVEL: Int = CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_FULL
         private const val MSG_OPEN_CAMERA: Int = 1
         private const val MSG_CLOSE_CAMERA: Int = 2
     }
@@ -67,12 +67,14 @@ class MainActivity : AppCompatActivity(), Handler.Callback {
         val cameraIdList = cameraManager.cameraIdList
         cameraIdList.forEach { cameraId ->
             val cameraCharacteristics = cameraManager.getCameraCharacteristics(cameraId)
-            if (cameraCharacteristics[CameraCharacteristics.LENS_FACING] == CameraCharacteristics.LENS_FACING_FRONT) {
-                frontCameraId = cameraId
-                frontCameraCharacteristics = cameraCharacteristics
-            } else if (cameraCharacteristics[CameraCharacteristics.LENS_FACING] == CameraCharacteristics.LENS_FACING_BACK) {
-                backCameraId = cameraId
-                backCameraCharacteristics = cameraCharacteristics
+            if (cameraCharacteristics.isHardwareLevelSupported(REQUIRED_SUPPORTED_HARDWARE_LEVEL)) {
+                if (cameraCharacteristics[CameraCharacteristics.LENS_FACING] == CameraCharacteristics.LENS_FACING_FRONT) {
+                    frontCameraId = cameraId
+                    frontCameraCharacteristics = cameraCharacteristics
+                } else if (cameraCharacteristics[CameraCharacteristics.LENS_FACING] == CameraCharacteristics.LENS_FACING_BACK) {
+                    backCameraId = cameraId
+                    backCameraCharacteristics = cameraCharacteristics
+                }
             }
         }
     }
