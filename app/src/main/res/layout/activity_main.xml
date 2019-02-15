@@ -14,4 +14,29 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/thumbnail_view"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_margin="8dp"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_image_thumbnail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/capture_image_button"
+        app:layout_constraintTop_toBottomOf="@+id/camera_preview" />
+
+    <ImageButton
+        android:id="@+id/capture_image_button"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/bg_capture_button"
+        android:contentDescription="Capture image"
+        android:src="@drawable/ic_capture_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/camera_preview" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
